@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonTestMailSender", "OzonTestMailSender\OzonTestMailSender.csproj", "{4063495C-C8F9-4D4E-8FB2-5015FA877CA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonTestMailSender.Core", "OzonTestMailSender.Core\OzonTestMailSender.Core.csproj", "{8D49B3B8-CCC3-4279-9B76-4EB623C69F99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonTestMailSender.Infrastructure", "OzonTestMailSender.Infrastructure\OzonTestMailSender.Infrastructure.csproj", "{9F597EE1-D5BA-4C10-B1D2-2494486EF1BC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4063495C-C8F9-4D4E-8FB2-5015FA877CA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4063495C-C8F9-4D4E-8FB2-5015FA877CA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4063495C-C8F9-4D4E-8FB2-5015FA877CA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4063495C-C8F9-4D4E-8FB2-5015FA877CA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D49B3B8-CCC3-4279-9B76-4EB623C69F99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D49B3B8-CCC3-4279-9B76-4EB623C69F99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D49B3B8-CCC3-4279-9B76-4EB623C69F99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D49B3B8-CCC3-4279-9B76-4EB623C69F99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F597EE1-D5BA-4C10-B1D2-2494486EF1BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F597EE1-D5BA-4C10-B1D2-2494486EF1BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F597EE1-D5BA-4C10-B1D2-2494486EF1BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F597EE1-D5BA-4C10-B1D2-2494486EF1BC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
