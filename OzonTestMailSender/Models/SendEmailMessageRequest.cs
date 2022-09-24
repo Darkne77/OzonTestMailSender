@@ -14,7 +14,5 @@ public class SendEmailMessageRequest
     [Required]
     public string Text { get; set; }
     
-    //TODO .AddJsonOptions(o => o.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase);
-    [JsonPropertyName("Carbon_Copy_Recipients")]
     public string[] CarbonCopyRecipients { get; set; }
 }
