@@ -20,13 +20,14 @@ public class EmailsController : ControllerBase
     }
     
     [HttpPost]
-    public async Task<IActionResult> SendEmail([FromBody]SendEmailMessageRequest model)
+    public async Task<IActionResult> SendEmail([FromBody]SendEmailMessageRequest model, 
+        CancellationToken token)
     {
         var message = new CoreEmailMessage(model.Recipient,
                                            model.Subject,
                                            model.Text,
                                            model.CarbonCopyRecipients);
-        await _emailService.Send(message);
+        await _emailService.Send(message, token);
 
         return Ok();
     }

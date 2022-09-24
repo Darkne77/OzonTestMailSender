@@ -25,27 +25,25 @@ public class EmailService : IEmailService
         }
         catch (Exception e)
         {
-            //TODO Custom exception
-            Console.WriteLine(e);
-            throw;
+            throw new GetMessageHistoryException();
         }
     }
 
-    public async Task Send(EmailMessage message)
+    public async Task Send(EmailMessage message, CancellationToken token)
     {
         try
         {
-            await _emailSender.Send(message);
+            await _emailSender.Send(message, token);
         }
         catch (Exception e)
         {
-            await SaveMessageResult(message, MessageStatus.SendingError);
+            await SaveMessageResult(message, MessageStatus.SendingError, token);
             throw new SendEmailMessageException();
         }
 
         try
         {
-            await SaveMessageResult(message, MessageStatus.Sent);
+            await SaveMessageResult(message, MessageStatus.Sent, token);
         }
         catch
         {
@@ -53,9 +51,10 @@ public class EmailService : IEmailService
         }
     }
 
-    private async Task SaveMessageResult(EmailMessage message, MessageStatus status)
+    private async Task SaveMessageResult(EmailMessage message, MessageStatus status,
+        CancellationToken token)
     {
         var messageResult = new SentMessageResult(message, status);
-        await _messageHistory.Add(messageResult);
+        await _messageHistory.Add(messageResult, token);
     }
 }

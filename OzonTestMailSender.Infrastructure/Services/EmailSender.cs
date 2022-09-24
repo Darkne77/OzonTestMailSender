@@ -23,21 +23,20 @@ public class EmailSender : IEmailSender
                       EnableSsl = true,
                   };
     }
-
-    //TODO rename coreMessage
-    public async Task Send(EmailMessage coreMessage)
+    
+    public async Task Send(EmailMessage emailMessage, CancellationToken token)
     {
         var message = new MailMessage(_credentials.Name,
-                                      coreMessage.Recipient,
-                                      coreMessage.Subject,
-                                      coreMessage.Text);
-        foreach (var recipient in coreMessage.CarbonCopyRecipients)
+                                      emailMessage.Recipient,
+                                      emailMessage.Subject,
+                                      emailMessage.Text);
+        foreach (var recipient in emailMessage.CarbonCopyRecipients)
         {
-            if (!recipient.Equals(coreMessage.Recipient))
+            if (!recipient.Equals(emailMessage.Recipient))
             {
                 message.To.Add(recipient);
             }
         }
-        await _client.SendMailAsync(message);
+        await _client.SendMailAsync(message, token);
     }
 }

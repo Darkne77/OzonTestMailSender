@@ -18,10 +18,10 @@ public class MessageHistoryRepository : IMessageHistoryRepository
         _connectionString = connectionStrings.Value.OzonTestMailSenderDB;
     }
 
-    public async Task Add(SentMessageResult messageResult)
+    public async Task Add(SentMessageResult messageResult, CancellationToken token)
     {
         await using var connection = new NpgsqlConnection(_connectionString);
-        await connection.OpenAsync();
+        await connection.OpenAsync(token);
         
         var cmdText = 
             $@"INSERT INTO main.""{EmailMessageTableName}"" " +
@@ -36,8 +36,7 @@ public class MessageHistoryRepository : IMessageHistoryRepository
                                  CarbonCopyRecipients = messageResult.EmailMessage.CarbonCopyRecipients,
                                  Status = messageResult.Status
                              };
-
-        //TODO try catch
+        
         await connection.ExecuteAsync(cmdText, queryArguments);
     }
 

@@ -4,5 +4,5 @@ namespace OzonTestMailSender.Core.Services;
 
 public interface IEmailSender
 {
-    Task Send(EmailMessage message);
+    Task Send(EmailMessage emailMessage, CancellationToken token);
 }
