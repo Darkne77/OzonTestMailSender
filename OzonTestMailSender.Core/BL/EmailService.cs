@@ -9,8 +9,7 @@ public class EmailService : IEmailService
 {
     private readonly IEmailSender _emailSender;
     private readonly IMessageHistoryRepository _messageHistory;
-
-    //TODO Add cancellation token
+    
     public EmailService(IEmailSender emailSender, IMessageHistoryRepository messageHistory)
     {
         _emailSender = emailSender;
