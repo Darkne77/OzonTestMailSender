@@ -1,4 +1,6 @@
-﻿using OzonTestMailSender.Core.Exceptions;
+﻿using FluentResults;
+using OzonTestMailSender.Core.Errors;
+using OzonTestMailSender.Core.Exceptions;
 using OzonTestMailSender.Core.Models;
 using OzonTestMailSender.Core.Repositories;
 using OzonTestMailSender.Core.Services;
@@ -16,20 +18,21 @@ public class EmailService : IEmailService
         _messageHistory = messageHistory;
     }
 
-    public async Task<IEnumerable<SentMessageResult>> GetMessageHistory()
+    public async Task<Result<IEnumerable<SentMessageResult>>> GetMessageHistory()
     {
         try
         {
-            return await _messageHistory.GetAll();
+            return Result.Ok(await _messageHistory.GetAll());
         }
         catch (Exception e)
         {
-            throw new GetMessageHistoryException();
+            return Result.Fail(new GetMessageHistoryError().CausedBy(e));
         }
     }
 
     public async Task Send(EmailMessage message, CancellationToken token)
     {
+        //TODO use Result pattern
         try
         {
             await _emailSender.Send(message, token);

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using OzonTestMailSender.Core.BL;
+using OzonTestMailSender.Core.Errors;
 using OzonTestMailSender.Models;
 using CoreEmailMessage = OzonTestMailSender.Core.Models.EmailMessage;
 
@@ -36,7 +37,13 @@ public class EmailsController : ControllerBase
     public async Task<ActionResult<GetEmailsHistoryResponse>> GetEmailsHistory()
     {
         var messageResults = await _emailService.GetMessageHistory();
-        var sendEmailResults = _mapper.Map<IEnumerable<SendEmailResult>>(messageResults);
+        if (messageResults.IsFailed)
+        {
+            return messageResults.HasError<ApplicationError>() 
+                       ? StatusCode(StatusCodes.Status500InternalServerError) 
+                       : BadRequest();
+        }
+        var sendEmailResults = _mapper.Map<IEnumerable<SendEmailResult>>(messageResults.Value);
         return new GetEmailsHistoryResponse(sendEmailResults);
     }
 }
